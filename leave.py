@@ -23,10 +23,10 @@ class Growler:
 		self.reggrowl()
 		
 	def notify(self):
-		self.growl.notify( "leaveTime", "Time to leave!", "Go go go!", None, True, None)
+		self.growl.notify( "Leaving time", "Time to leave!", "Go go go!", None, True, None)
 			
 	def reggrowl(self):
-		self.growl = Growl.GrowlNotifier( "Leave", ["leaveTime"] )
+		self.growl = Growl.GrowlNotifier( "Leave", ["Leaving time"] )
 		self.growl.register()
 		
 def getsecsfrommins(input):
@@ -53,6 +53,10 @@ def main():
 	try:		
 		if sys.argv[1] == 'in':
 			secs = int(sys.argv[2]) * 60
+			
+			if secs < 0:
+				raise ValueError
+				
 			print "Leaving in " + sys.argv[2] + " minutes..."
 			
 		elif sys.argv[1] == 'at':
@@ -65,6 +69,11 @@ def main():
 			
 	except IndexError:
 		print "Command syntax should be 'leave [in|at] time'"
+		
+	except ValueError:
+		print "Values are incorrect:" 
+		print "    'in' values are positive integers (minutes)" 
+		print "    'at' values are of the form 'hours:mins'"
 
 if __name__ == '__main__':
 	main()
