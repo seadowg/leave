@@ -1,4 +1,4 @@
-#Leave
+#leave
 
 ##Description
 
@@ -19,10 +19,10 @@ In ten minutes a growl notification pops up and tells me that its time to go. Ya
 
 You'll need:
 	- Growl (http://growl.info)
-	- Growl Python bindings (http://growl.info/documentation/developer/python-support.php)
 	- Python (http://www.python.org)
 
-To install simply clone or download the source and put 'leave' in /usr/bin (as it should be in you PATH already). You're done!
+To install simply clone or download the source and run the install.sh script provided. It will prompt you for your password as it
+copies files into /usr/bin. After its finished running you should be good to go!
 
 ##Commands
 
@@ -35,6 +35,7 @@ This will pop up a growl (remember not to close the terminal) in x minutes. You 
 	leave at x
 	
 Here x should be of the format 'hours:mins'. My flat mate asked me why he couldn't specify seconds. I really hope no one actually micro manages their day to that degree.
-	
 
-	
+##Problems?
+
+If you have any problems at all please don't hesitate to raise an issue on github or email me (oetzi101@gmail.com).	
