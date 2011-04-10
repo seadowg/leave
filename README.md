@@ -44,12 +44,6 @@ This will pop up a growl (remember not to close the terminal) in x minutes. You 
 	leave at x
 	
 Here x should be of the format 'hours:mins'. My flat mate asked me why he couldn't specify seconds. I really hope no one actually micro manages their day to that degree.
-
-##Planned Features
-
-*Make it more distributable, possibly with py2app or something
-*Ubuntu?
-*More error checking to prevent python errors popping up
 	
 
 	
