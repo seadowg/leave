@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
-"""
-leave.py
-
-Created by Callum Stott on 2011-04-09.
-Copyright (c) 2011. All rights reserved.
-"""
+#
+# Created by Callum Stott 2011
 
 import sys
 import time
