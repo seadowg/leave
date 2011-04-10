@@ -24,12 +24,12 @@ You'll need:
 
 1. Clone or download the source and put leave.py somewhere (usr/bin is always good...)
 2. Make an alias in your .bashrc like this:
-
-	alias leave='wherever you put the file'
+	
+       alias leave='wherever you put the file'
 	
 3. Give the file execution permission:
-
-	chmod +x leave.py
+	
+       chmod +x leave.py
 	
 You're done!
 
