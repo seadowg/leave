@@ -58,6 +58,9 @@ def main():
 		elif sys.argv[1] == 'at':
 			secs = getsecsuntil(sys.argv[2])
 			print "Leaving at " + sys.argv[2]
+			
+		else:
+			raise IndexError
 
 		timer = Timer(secs)
 		timer.run()
