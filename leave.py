@@ -1,0 +1,71 @@
+#!/usr/bin/env python
+# encoding: utf-8
+"""
+leave.py
+
+Created by Callum Stott on 2011-04-09.
+Copyright (c) 2011. All rights reserved.
+"""
+
+import sys
+import time
+import Growl
+
+class Timer:
+	def __init__(self, time):
+		self.time = time
+		
+	def run(self):
+		time.sleep(self.time)
+
+class Growler:
+	def __init__(self):
+		self.reggrowl()
+		
+	def notify(self):
+		self.growl.notify( "leaveTime", "Time to leave!", "Go go go!", None, True, None)
+			
+	def reggrowl(self):
+		self.growl = Growl.GrowlNotifier( "Leave", ["leaveTime"] )
+		self.growl.register()
+		
+def getsecsfrommins(input):
+	return int(input) * 60
+		
+def getsecsuntil(input):
+	current = time.localtime()
+	target = time.strptime(input, "%H:%M")
+	hour = target.tm_hour
+
+	if target.tm_hour < current.tm_hour:
+		hour = hour + 24
+		
+	hours = hour - current.tm_hour
+	
+	if hours == 0 and target.tm_min < current.tm_min:
+		hours = 24
+		
+	return (hours * 3600) + ((target.tm_min - current.tm_min) * 60) - current.tm_sec
+
+def main():
+	growl = Growler()
+	
+	try:		
+		if sys.argv[1] == 'in':
+			secs = int(sys.argv[2]) * 60
+			print "Leaving in " + sys.argv[2] + " minutes..."
+			
+		elif sys.argv[1] == 'at':
+			secs = getsecsuntil(sys.argv[2])
+			print "Leaving at " + sys.argv[2]
+
+		timer = Timer(secs)
+		timer.run()
+		growl.notify()
+			
+	except IndexError:
+		print "Command syntax should be 'leave [in|at] time'"
+
+if __name__ == '__main__':
+	main()
+
