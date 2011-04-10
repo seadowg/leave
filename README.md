@@ -22,9 +22,7 @@ You'll need:
 	- Growl Python bindings (http://growl.info/documentation/developer/python-support.php)
 	- Python (http://www.python.org)
 
-1. Clone or download the source and put 'leave' in /usr/bin (as it should be in you PATH already)
-	
-You're done!
+To install simply clone or download the source and put 'leave' in /usr/bin (as it should be in you PATH already). You're done!
 
 ##Commands
 
