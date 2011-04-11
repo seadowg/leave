@@ -64,36 +64,36 @@ def getsecsuntil(input):
 		
 	return (hours * 3600) + ((target.tm_min - current.tm_min) * 60) - current.tm_sec
 
-def main():
-	
+def main():	
 	try:		
 		if sys.argv[1] == 'in':
 			secs = int(sys.argv[2]) * 60
 			
 			if secs < 0:
 				raise ValueError
+				
+			print "Leaving in " + sys.argv[2] + " minutes..."
 			
 		elif sys.argv[1] == 'at':
 			secs = getsecsuntil(sys.argv[2])
+			print "Leaving at " + sys.argv[2] + "..."
 			
 		else:
 			raise IndexError
-
-		timer = Timer(secs)
+		
+		daemonize()
 		growl = Growler()
+		timer = Timer(secs)
 		timer.run()
 		growl.notify()
 			
 	except IndexError:
-		pass
-		#print "Command syntax should be 'leave [in|at] time'"
+		print "Command syntax should be 'leave [in|at] time'"
 		
 	except ValueError:
-		pass
-		#print "Values are incorrect:" 
-		#print "    'in' values are positive integers (minutes)" 
-		#print "    'at' values are of the form 'hours:mins'"
+		print "Values are incorrect:" 
+		print "    'in' values are positive integers (minutes)" 
+		print "    'at' values are of the form 'hours:mins'"
 
 if __name__ == '__main__':
-	daemonize()
 	main()
