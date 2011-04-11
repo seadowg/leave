@@ -3,8 +3,7 @@
 #
 # Created by Callum Stott 2011
 
-import sys
-import time
+import sys, os, time
 import Growl
 
 class Timer:
@@ -25,6 +24,32 @@ class Growler:
 		self.growl = Growl.GrowlNotifier( "Leave", ["Leaving time"] )
 		self.growl.register()
 		
+def daemonize():
+	try:
+		pid = os.fork()
+	
+	except OSError, e:
+		pass
+	
+	if pid == 0:
+		os.setsid()
+	
+		try:
+			pid = os.fork()
+	
+		except OSError, e:
+			pass
+			
+		if pid == 0:
+			os.chdir('/usr/bin')
+			os.umask(0)
+	
+		else:
+			os._exit(0)
+			
+	else:
+		os._exit(0)
+	
 def getsecsfrommins(input):
 	return int(input) * 60
 		
@@ -53,11 +78,11 @@ def main():
 			if secs < 0:
 				raise ValueError
 				
-			print "Leaving in " + sys.argv[2] + " minutes..."
+			#print "Leaving in " + sys.argv[2] + " minutes..."
 			
 		elif sys.argv[1] == 'at':
 			secs = getsecsuntil(sys.argv[2])
-			print "Leaving at " + sys.argv[2]
+			#print "Leaving at " + sys.argv[2]
 			
 		else:
 			raise IndexError
@@ -67,12 +92,15 @@ def main():
 		growl.notify()
 			
 	except IndexError:
-		print "Command syntax should be 'leave [in|at] time'"
+		pass
+		#print "Command syntax should be 'leave [in|at] time'"
 		
 	except ValueError:
-		print "Values are incorrect:" 
-		print "    'in' values are positive integers (minutes)" 
-		print "    'at' values are of the form 'hours:mins'"
+		pass
+		#print "Values are incorrect:" 
+		#print "    'in' values are positive integers (minutes)" 
+		#print "    'at' values are of the form 'hours:mins'"
 
 if __name__ == '__main__':
+	daemonize()
 	main()
