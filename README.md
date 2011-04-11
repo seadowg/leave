@@ -30,7 +30,7 @@ Leave can be used in two ways. Firstly:
 
 	leave in x
 	
-This will pop up a growl (remember not to close the terminal) in x minutes. You can also specify a time:
+This will pop up a growl in x minutes. You can also specify a time:
 
 	leave at x
 	
