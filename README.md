@@ -21,7 +21,7 @@ You'll need:
 	- Growl (http://growl.info)
 	- Python (http://www.python.org)
 
-To install simply clone or download the source and run the install.sh script provided. It will prompt you for your password as it
+To install, simply clone or download the source and run the install.sh script provided. It will prompt you for your password as it
 copies files into /usr/bin. After its finished running you should be good to go!
 
 ##Commands
