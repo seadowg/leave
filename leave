@@ -47,7 +47,21 @@ def daemonize():
 		os._exit(0)
 		
 def kill():
-	pass
+	for line in os.popen("ps aux"):
+		fields = line.split()
+		pid = fields[1]
+		
+		try:
+			pid = int(pid)
+			
+		except ValueError:
+			continue
+		
+		except IndexError:
+			continue
+
+		if line.find("leave in") > 0 or line.find("leave at") > 0:
+			os.kill(pid, signal.SIGKILL)
 			
 def set(secs):
 	daemonize()
