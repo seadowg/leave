@@ -57,9 +57,6 @@ def kill():
 		except ValueError:
 			continue
 		
-		except IndexError:
-			continue
-
 		if line.find("leave in") > 0 or line.find("leave at") > 0:
 			os.kill(pid, signal.SIGKILL)
 			
