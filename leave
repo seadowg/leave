@@ -3,7 +3,7 @@
 #
 # Created by Callum Stott 2011
 
-import sys, os, time
+import sys, os, time, signal
 import Growl
 
 class Timer:
@@ -45,6 +45,16 @@ def daemonize():
 			
 	else:
 		os._exit(0)
+		
+def kill():
+	pass
+			
+def set(secs):
+	daemonize()
+	growl = Growler()
+	timer = Timer(secs)
+	timer.run()
+	growl.notify()
 	
 def getsecsfrommins(input):
 	return int(input) * 60
@@ -73,19 +83,18 @@ def main():
 				raise ValueError
 				
 			print "Leaving in " + sys.argv[2] + " minutes..."
+			set(secs)
 			
 		elif sys.argv[1] == 'at':
 			secs = getsecsuntil(sys.argv[2])
 			print "Leaving at " + sys.argv[2] + "..."
+			set(secs)
+			
+		elif sys.argv[1] == 'cancel':
+			kill()
 			
 		else:
 			raise IndexError
-		
-		daemonize()
-		growl = Growler()
-		timer = Timer(secs)
-		timer.run()
-		growl.notify()
 			
 	except IndexError:
 		print "Command syntax should be 'leave [in|at] time'"
