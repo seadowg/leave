@@ -59,6 +59,24 @@ def kill():
 		
 		if line.find("leave in") > 0 or line.find("leave at") > 0:
 			os.kill(pid, signal.SIGKILL)
+
+def alreadyleaving():
+	for line in os.popen("ps aux"):
+		fields = line.split()
+		pid = fields[1]
+		
+		try:
+			pid = int(pid)
+			
+		except ValueError:
+			continue
+			
+		if pid == os.getpid():
+			continue
+		
+		elif line.find("leave in") > 0 or line.find("leave at") > 0:
+			print "You're already leaving! How can you leave twice? Would that be staying? Hmmm..."
+			sys.exit(0)
 			
 def set(secs):
 	daemonize()
@@ -88,6 +106,7 @@ def getsecsuntil(input):
 def main():	
 	try:		
 		if sys.argv[1] == 'in':
+			alreadyleaving()
 			secs = getsecsfrommins(sys.argv[2])
 			
 			if secs < 0:
@@ -97,6 +116,7 @@ def main():
 			set(secs)
 			
 		elif sys.argv[1] == 'at':
+			alreadyleaving()
 			secs = getsecsuntil(sys.argv[2])
 			print "Leaving at " + sys.argv[2] + "..."
 			set(secs)

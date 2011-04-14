@@ -34,7 +34,13 @@ This will pop up a growl in x minutes. You can also specify a time:
 
 	leave at x
 	
-Here x should be of the format 'hours:mins'. My flat mate asked me why he couldn't specify seconds. I really hope no one actually micro manages their day to that degree.
+Here x should be of the format 'hours:mins'. My flat mate asked me why he couldn't specify seconds. I really hope no one actually
+micro manages their day to that degree. So what happens if you decide the person you're meeting sucks and you can't be bothered
+leaving? Just do:
+
+	leave cancel
+	
+This will cancel the current countdown.
 
 ##Problems?
 
