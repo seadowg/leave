@@ -88,7 +88,7 @@ def getsecsuntil(input):
 def main():	
 	try:		
 		if sys.argv[1] == 'in':
-			secs = int(sys.argv[2]) * 60
+			secs = getsecsfrommins(sys.argv[2])
 			
 			if secs < 0:
 				raise ValueError
