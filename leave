@@ -12,17 +12,25 @@ import threading
 import Growl
 
 class Listener(threading.Thread):
+	def __init__(self):
+		threading.Thread.__init__(self)
+		self.keeprunning = True
+		
 	def run(self):
 		hole = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		hole.bind(('', 1337))
 		hole.listen(1)
-		while True:
+		while self.keeprunning:
 			stream, address = hole.accept()
 			if stream.recv(100) == "kill":
 				stream.close()
 				hole.close()
 				killthis()
-
+		hole.close()
+				
+	def kill(self):
+		self.keeprunning = False
+		
 class Timer:
 	def __init__(self, time):
 		self.time = time
@@ -79,22 +87,25 @@ def alreadyleaving():
 	search = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	try:
 		search.connect(('localhost', 1337))
-		print "You are alreading leaving!"
+		print "How can you leave twice? Would that be staying? Hmmmm...."
 		sys.exit(0)
 	except socket.error:
 		pass
 
 
 def startlistener():
-	Listener().start()
+	listener = Listener()
+	listener.start()
+	return listener
 			
 def set(secs):
 	daemonize()
 	growl = Growler()
 	timer = Timer(secs)
-	startlistener()
+	listener = startlistener()
 	timer.run()
 	growl.notify()
+	listener.kill()
 	
 def getsecsfrommins(input):
 	return int(input) * 60
@@ -117,18 +128,18 @@ def getsecsuntil(input):
 def main():	
 	try:		
 		if sys.argv[1] == 'in':
-			alreadyleaving()
 			secs = getsecsfrommins(sys.argv[2])
 			
 			if secs < 0:
 				raise ValueError
 				
+			alreadyleaving()
 			print "Leaving in " + sys.argv[2] + " minutes..."
 			set(secs)
 			
 		elif sys.argv[1] == 'at':
-			alreadyleaving()
 			secs = getsecsuntil(sys.argv[2])
+			alreadyleaving()
 			print "Leaving at " + sys.argv[2] + "..."
 			set(secs)
 			
