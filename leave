@@ -18,7 +18,7 @@ class Listener(threading.Thread):
 		
 	def run(self):
 		hole = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		hole.bind(('', 1337))
+		hole.bind(('', 65530))
 		hole.listen(1)
 		while self.keeprunning:
 			stream, address = hole.accept()
@@ -74,7 +74,7 @@ def daemonize():
 def kill():
 	kill = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	try:
-		kill.connect(('localhost', 1337))
+		kill.connect(('localhost', 65530))
 		kill.send("kill")
 		kill.close()
 	except socket.error:
@@ -86,7 +86,7 @@ def killthis():
 def alreadyleaving():
 	search = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	try:
-		search.connect(('localhost', 1337))
+		search.connect(('localhost', 65530))
 		print "How can you leave twice? Would that be staying? Hmmmm...."
 		sys.exit(0)
 	except socket.error:
