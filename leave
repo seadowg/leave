@@ -51,23 +51,17 @@ class Growler:
 		
 def daemonize():
 	try:
-		pid = os.fork()
-	
+		pid = os.fork()	
 	except OSError:
 		pass
-	
 	if pid == 0:
 		os.setsid()
-	
 		try:
 			pid = os.fork()
-	
 		except OSError:
-			pass
-			
+			pass		
 		if pid != 0:
-			os._exit(0)
-			
+			os._exit(0)		
 	else:
 		os._exit(0)
 		
