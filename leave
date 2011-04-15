@@ -3,8 +3,25 @@
 #
 # Created by Callum Stott 2011
 
-import sys, os, time, signal
+import sys
+import os 
+import time
+import signal
+import socket
+import threading
 import Growl
+
+class Listener(threading.Thread):
+	def run(self):
+		hole = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		hole.bind(('', 1337))
+		hole.listen(1)
+		while True:
+			stream, address = hole.accept()
+			if stream.recv(100) == "kill":
+				stream.close()
+				hole.close()
+				killthis()
 
 class Timer:
 	def __init__(self, time):
@@ -47,41 +64,35 @@ def daemonize():
 		os._exit(0)
 		
 def kill():
-	for line in os.popen("ps aux"):
-		fields = line.split()
-		pid = fields[1]
-		
-		try:
-			pid = int(pid)
+	kill = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	try:
+		kill.connect(('localhost', 1337))
+		kill.send("kill")
+		kill.close()
+	except socket.error:
+		pass
 			
-		except ValueError:
-			continue
-		
-		if line.find("leave in") > 0 or line.find("leave at") > 0:
-			os.kill(pid, signal.SIGKILL)
+def killthis():
+	os._exit(0)
 
 def alreadyleaving():
-	for line in os.popen("ps aux"):
-		fields = line.split()
-		pid = fields[1]
-		
-		try:
-			pid = int(pid)
-			
-		except ValueError:
-			continue
-			
-		if pid == os.getpid():
-			continue
-		
-		elif line.find("leave in") > 0 or line.find("leave at") > 0:
-			print "You're already leaving! How can you leave twice? Would that be staying? Hmmm..."
-			sys.exit(0)
+	search = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	try:
+		search.connect(('localhost', 1337))
+		print "You are alreading leaving!"
+		sys.exit(0)
+	except socket.error:
+		pass
+
+
+def startlistener():
+	Listener().start()
 			
 def set(secs):
 	daemonize()
 	growl = Growler()
 	timer = Timer(secs)
+	startlistener()
 	timer.run()
 	growl.notify()
 	
