@@ -20,8 +20,12 @@ class Listener(threading.Thread):
 		hole = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		hole.bind(('', 65530))
 		hole.listen(1)
+		hole.settimeout(0.1)
 		while self.keeprunning:
-			stream, address = hole.accept()
+			try:
+				stream, address = hole.accept()
+			except socket.timeout:
+				continue
 			if stream.recv(100) == "kill":
 				stream.close()
 				hole.close()
@@ -86,10 +90,10 @@ def alreadyleaving():
 	except socket.error:
 		pass
 
-
 def startlistener():
 	listener = Listener()
 	listener.start()
+	
 	return listener
 			
 def set(secs):
@@ -108,14 +112,13 @@ def getsecsuntil(input):
 	current = time.localtime()
 	target = time.strptime(input, "%H:%M")
 	hour = target.tm_hour
-
+	
 	if target.tm_hour < current.tm_hour:
-		hour = hour + 24
-		
-	hours = hour - current.tm_hour
+		hour = hour + 24		
+	hours = hour - current.tm_hour	
 	
 	if hours == 0 and target.tm_min < current.tm_min:
-		hours = 24
+		hours = 24	
 		
 	return (hours * 3600) + ((target.tm_min - current.tm_min) * 60) - current.tm_sec
 
