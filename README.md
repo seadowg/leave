@@ -24,6 +24,9 @@ You'll need:
 To install, simply clone or download the source and run the install.sh script provided. It will prompt you for your password as it
 copies files into /usr/bin. After its finished running you should be good to go!
 
+Note: leave listens for cancelations etc on port 65530 (which was chosen via a rigorous application process - in the end it turned
+out he was just the best man for job and he makes a mean paella) so it won't work if something else is using it.
+
 ##Commands
 
 Leave can be used in two ways. Firstly:
