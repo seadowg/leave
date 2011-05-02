@@ -40,7 +40,10 @@ class Timer:
 		self.time = time
 		
 	def run(self):
-		time.sleep(self.time)
+		while True:
+			if time.time() >= self.time:
+				break
+			
 
 class Growler:
 	def __init__(self):
@@ -132,13 +135,13 @@ def main():
 				
 			alreadyleaving()
 			print "Leaving in " + sys.argv[2] + " minutes..."
-			set(secs)
+			set(time.time() + secs)
 			
 		elif sys.argv[1] == 'at':
 			secs = getsecsuntil(sys.argv[2])
 			alreadyleaving()
 			print "Leaving at " + sys.argv[2] + "..."
-			set(secs)
+			set(time.time() + secs)
 			
 		elif sys.argv[1] == 'cancel':
 			kill()
