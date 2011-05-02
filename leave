@@ -43,6 +43,7 @@ class Timer:
 		while True:
 			if time.time() >= self.time:
 				break
+			time.sleep(0.1)
 			
 
 class Growler:
