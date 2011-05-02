@@ -110,7 +110,7 @@ def set(secs):
 	listener.kill()
 	
 def getsecsfrommins(input):
-	return int(input) * 60
+	return int(input) * 60 + time.time()
 		
 def getsecsuntil(input):
 	current = time.localtime()
@@ -124,7 +124,7 @@ def getsecsuntil(input):
 	if hours == 0 and target.tm_min < current.tm_min:
 		hours = 24	
 		
-	return (hours * 3600) + ((target.tm_min - current.tm_min) * 60) - current.tm_sec
+	return (hours * 3600) + ((target.tm_min - current.tm_min) * 60) - current.tm_sec + time.time()
 
 def main():	
 	try:		
@@ -136,13 +136,13 @@ def main():
 				
 			alreadyleaving()
 			print "Leaving in " + sys.argv[2] + " minutes..."
-			set(time.time() + secs)
+			set(secs)
 			
 		elif sys.argv[1] == 'at':
 			secs = getsecsuntil(sys.argv[2])
 			alreadyleaving()
 			print "Leaving at " + sys.argv[2] + "..."
-			set(time.time() + secs)
+			set(secs)
 			
 		elif sys.argv[1] == 'cancel':
 			kill()
