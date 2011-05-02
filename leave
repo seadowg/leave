@@ -30,6 +30,9 @@ class Listener(threading.Thread):
 				stream.close()
 				hole.close()
 				killthis()
+			elif stream.recv(100) == "info":
+				#send info back
+				pass
 		hole.close()
 				
 	def kill(self):
@@ -89,6 +92,13 @@ def alreadyleaving():
 		sys.exit(0)
 	except socket.error:
 		pass
+		
+def details():
+	search = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	try:
+		search.connect(('localhost', 65530))
+	except socket.error:
+		print "What do you mean? You're not going anywhere..."
 
 def startlistener():
 	listener = Listener()
