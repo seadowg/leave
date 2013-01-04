@@ -1,5 +1,9 @@
 #leave
 
+### Note: This currently doesn't work
+
+Leave is really out of date and I need to update it to work with the new Growl libraries. Gimme a sec.
+
 ##Description
 
 So you're sitting trying to understand how you've broken the dev environment on your extra special rails project and your girlfriend calls you.
