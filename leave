@@ -30,6 +30,8 @@ class Listener(threading.Thread):
 				stream.close()
 				hole.close()
 				killthis()
+			else:
+				stream.close()
 		hole.close()
 				
 	def kill(self):
@@ -89,6 +91,8 @@ def alreadyleaving():
 	search = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	try:
 		search.connect(('localhost', 65530))
+		search.send("not_kill")
+		search.close()
 		print "How can you leave twice? Would that be staying? Hmmmm...."
 		sys.exit(0)
 	except socket.error:
