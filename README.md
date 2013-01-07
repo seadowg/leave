@@ -1,6 +1,6 @@
 #leave
 
-### Note: This currently doesn't work with Growl 3.0
+### Note: This currently doesn't work with Growl 2.0
 
 Leave is really out of date and I need to update it to work with the new Growl libraries. Gimme a sec.
 
