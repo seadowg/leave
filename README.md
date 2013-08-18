@@ -2,7 +2,7 @@
 
 ### Note: This currently doesn't work with Growl 2.0
 
-Leave is really out of date and I need to update it to work with the new Growl libraries. Gimme a sec.
+I'm planning to rewrite this in Go and make it work with OS X's native notifications.
 
 ##Description
 
