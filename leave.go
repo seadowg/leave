@@ -9,26 +9,32 @@ import (
 )
 
 func main() {
-	command, minutesArg := parseArgs(os.Args)
+	if len(os.Args) < 3 {
+		help()
+	} else {
+		command, minutesArg := os.Args[1], os.Args[2]
 
-	if command == "in" {
-		minutes, err := strconv.Atoi(minutesArg)
+		if command == "in" {
+			minutes, err := strconv.Atoi(minutesArg)
 
-		if err == nil {
-			time.Sleep(time.Duration(minutes) * time.Minute)
+			if err == nil {
+				time.Sleep(time.Duration(minutes) * time.Minute)
 
-			notification := gosxnotifier.NewNotification("Time to go!")
-			notification.Title = "Leave"
-			notification.Sound = gosxnotifier.Basso
-			notification.Link = "http://www.youtube.com/watch?v=_W_szJ6M-kM"
+				notification := gosxnotifier.NewNotification("Time to go!")
+				notification.Title = "Leave"
+				notification.Sound = gosxnotifier.Basso
+				notification.Link = "http://www.youtube.com/watch?v=_W_szJ6M-kM"
 
-			notification.Push()
+				notification.Push()
+			} else {
+				help()
+			}
 		} else {
-			fmt.Println("Time should be in minutes!")
+			help()
 		}
 	}
 }
 
-func parseArgs(args []string) (string, string) {
-	return args[1], args[2]
+func help() {
+	fmt.Println("Format: 'leave in x' where 'x' is minutes")
 }
