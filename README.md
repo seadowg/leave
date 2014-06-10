@@ -17,26 +17,10 @@ $ leave in 10
 
 In ten minutes a notification pops up and tells me that its time to go. Yay! You will never need time management again.
 
-## Commands
+## Installation
 
-Leave can be used in two ways. Firstly:
+To install simply download the [binary](https://github.com/seadowg/leave/raw/go/leave) and copy it to somewhere that's
+in your path.
 
-```bash
-leave in x
-```
-
-This will pop up a growl in x minutes. You can also specify a time:
-
-```bash
-leave at x
-```
-
-Here x should be of the format 'hours:mins'. My flat mate asked me why he couldn't specify seconds. I really hope no one actually
-micro manages their day to that degree. So what happens if you decide the person you're meeting sucks and you can't be bothered
-leaving? Just do:
-
-```bash
-leave cancel
-```
-
-This will cancel the current countdown.
+*Note*: There is already a binary `/usr/bin` on OS X named 'leave'. It's similar but not as fun. To get around
+this you can either alias to your leave installations binary or delete the one in ``/usr/bin`.
