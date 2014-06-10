@@ -1,10 +1,6 @@
-#leave
+# leave
 
-### Note: This currently doesn't work with Growl 2.0
-
-I'm planning to rewrite this in Go and make it work with OS X's native notifications.
-
-##Description
+## Description
 
 So you're sitting trying to understand how you've broken the dev environment on your extra special rails project and your girlfriend calls you.
 
@@ -15,24 +11,32 @@ You go back to what you were doing and by the time ten minutes has passed you've
 This sort of stuff happens to me all the time. I could take my phone out and set an alarm or something but this wasn't awesome
 enough. 'leave' allows you to pop open a terminal and do this:
 
-	$ leave in 10
+```bash
+$ leave in 10
+```
 
 In ten minutes a notification pops up and tells me that its time to go. Yay! You will never need time management again.
 
-##Commands
+## Commands
 
 Leave can be used in two ways. Firstly:
 
-	leave in x
+```bash
+leave in x
+```
 
 This will pop up a growl in x minutes. You can also specify a time:
 
-	leave at x
+```bash
+leave at x
+```
 
 Here x should be of the format 'hours:mins'. My flat mate asked me why he couldn't specify seconds. I really hope no one actually
 micro manages their day to that degree. So what happens if you decide the person you're meeting sucks and you can't be bothered
 leaving? Just do:
 
-	leave cancel
+```bash
+leave cancel
+```
 
 This will cancel the current countdown.
