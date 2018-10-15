@@ -19,7 +19,7 @@ In ten minutes a notification pops up and tells me that its time to go. Yay! You
 
 ## Installation
 
-To install simply download the [binary](https://github.com/seadowg/leave/raw/go/leave) and copy it to somewhere that's
+To install simply download the [binary](https://github.com/seadowg/leave/blob/master/leave?raw=true) and copy it to somewhere that's
 in your path.
 
 *Note*: There is already a binary `/usr/bin` on OS X named 'leave'. It's similar but not as fun. To get around
